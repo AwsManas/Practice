@@ -1,0 +1,70 @@
+#include<iostream>
+using namespace std;
+class mat
+{
+  int r,c;
+  int a[4][4];
+  public:
+  mat(int i,int j)
+     {
+      r=i; c=j;
+    }
+  void entry()
+   {
+     cout<<"Enter the matrix :-\n";
+     for(int i =0; i<r; i++)
+      for(int j=0; j<c; j++)
+       cin>>a[i][j];
+   }
+  mat operator + (mat k)
+      {
+        mat temp(k.r,k.c);
+        for(int i=0; i<r; i++)
+          for(int j=0; j<c; j++)
+           temp.a[i][j]=a[i][j]+k.a[i][j];
+        return temp;
+      }
+
+  mat operator - (mat k)
+      {
+        mat temp(k.r,k.c);
+        for(int i=0; i<r; i++)
+          for(int j=0; j<c; j++)
+           temp.a[i][j]=a[i][j]-k.a[i][j];
+        return temp;
+      }
+ int operator == (mat k )
+         {
+           if(r==k.r&&c==k.c)
+           return 1;
+           else return 0;
+         }
+ void print()
+      {
+       for(int i=0; i<r; i++)
+         {
+          for(int j=0; j<c; j++)
+          cout<<a[i][j]<<" ";
+          cout<<endl;
+         }
+       }
+};
+int main()
+{
+ cout<<"Enter r1,c1,r2,c2 : ";
+ int r1,c1,r2,c2;
+ cin>>r1>>c1>>r2>>c2;
+mat a(r1,c1),b(r2,c2);
+  if(a==b)
+     {
+      a.entry();
+      b.entry();
+      mat c = a+b;
+      mat d = a-b;
+      c.print();
+      d.print();
+     }
+  else
+  cout<<"Error!"<<endl;
+return 0;
+}
