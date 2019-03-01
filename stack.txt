@@ -1,0 +1,83 @@
+#include<iostream>
+using namespace std;
+class stack
+{
+ int a[19];
+int max;
+ int top;
+ public:
+ stack(int k)
+    {
+     max=k;
+     top=-1;
+    }
+ stack operator + (int push)
+     {
+       if(top!=max)
+          {
+            a[++top]=push;
+            cout<<"Data pushed \n";
+          }
+       else
+        cout<<"Overflow!!!"<<endl;
+       return *this;
+     }
+ stack operator -- ()
+      {
+        if(top==-1)
+        cout<<"Underflow \n";
+        else
+          {
+           top--;
+           cout<<"Data popped\n";
+          }
+        return *this;
+      }
+ stack operator --  (int k=0)
+   {
+    if(top==-1)
+    cout<<"Stack is empty\n";
+    else
+    {
+      cout<<"Stack is : ";
+      for(int i=0; i<=top; i++)
+       cout<<a[i]<<" ";
+       cout<<endl;
+    }
+   }
+
+};
+int main()
+{
+ cout<<"Enter the max number of elements : ";
+ int n;
+ cin>>n;
+ stack p(n);
+ int ch=1;
+ while(ch!=4)
+     {
+        cout<<"1:push, 2:Pop, 3:display 4:Exit :";
+        cin>>ch;
+        switch (ch)
+           {
+            case 1 : {
+                       cout<<"Enter item to be pushed : ";
+                       int k;
+                       cin>>k;
+                       p=p+k;
+                       break;
+                     }
+
+           case 2  : {
+                      p=--p;
+                      break;
+                     }
+           case 3 : { p= p--; break; }
+           default : { }
+
+           }
+        }
+return 0;
+cout<<"End";
+}
+                                                                                          
