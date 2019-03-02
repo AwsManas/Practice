@@ -1,0 +1,47 @@
+#include<iostream>
+#include<bits/stdc++.h>
+#include<cstring>
+#include<algorithm>
+using namespace std;
+int main()
+{
+int g[10][10],v;
+cout<<"Enter the number of vertices : ";
+cin>>v;
+cout<<"Enter the cost matrix :-\n";
+for(int i=0; i<v; i++)
+ {
+  for(int j=0; j<v; j++)
+  cin>>g[i][j];
+ }
+int no_edge=0;
+int selected[v];
+memset(selected,0,sizeof(selected)); //initialising to 0
+selected[0]=1;
+cout<<"Edge : Weight\n";
+while(no_edge<v-1)
+   {
+     int x,y,min=INT_MAX;
+     for(int i=0; i<v; i++)
+       {
+         if(selected[i])
+            {
+             for(int j=0; j<v; j++)
+              {
+                if(!selected[j]&&g[i][j])
+                 {
+                   if(min>g[i][j])
+                    {
+                     min=g[i][j];
+                     x=i;
+                     y=j;
+                    }
+                 }
+              }
+            }
+       }
+     cout<<x<<" -  "<<y<<"  :  "<<g[x][y]<<endl;
+     selected[y]=1;
+    no_edge++;
+   }
+}
