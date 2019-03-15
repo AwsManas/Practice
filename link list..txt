@@ -27,9 +27,9 @@ class ll
       p->next=NULL;
       if(start==NULL)
        {
-       cout<<"Start to be initialised\n";
+      // cout<<"Start to be initialised\n";
        start=p;
-       cout<<"Start initialised \n";
+     //  cout<<"Start initialised \n";
        }
       else
         {
@@ -39,6 +39,25 @@ class ll
          temp->next=p;
         }
     }
+    void delend()
+     {
+      if(start==NULL)
+      cout<<"Cant do , Underflow!";
+      else if(start->next==NULL)
+      start=NULL;
+      else
+      {
+       node *prev=start;
+       node *curr= start->next;
+       while(curr->next!=NULL)
+          {
+            prev=curr;
+            curr=curr->next;
+          }
+       prev->next=NULL;
+       delete curr;
+      }
+     }
     void print()
      {
       node *temp=start;
@@ -53,22 +72,25 @@ int main()
 {
   ll ptr;
   int ch=1;
-  while(ch!=3)
+  while(ch!=4)
     {
-      cout<<"1:inset, 2: Print , 3:Exit";
+      cout<<"1:inset, 2: Print , 3 :Delete end 4:Exit";
       cin>>ch;
        switch(ch)
         {
           case 1: {
                     cout<<"Enter data";
                     int t;
-                    cin>>t;
-                    ptr.insert(t);
+                    cin>>t;                    ptr.insert(t);
                     break;
                   }
           case 2 : {
                     ptr.print();
                    break;
+                   }
+          case 3 : {
+                     ptr.delend();
+                     break;
                    }
 
         }
@@ -77,4 +99,5 @@ int main()
 
 
 
-                     
+                      
+                                                                       
