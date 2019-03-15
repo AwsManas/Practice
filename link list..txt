@@ -1,0 +1,80 @@
+#include<iostream>
+using namespace std;
+class node
+ {
+   public:
+  int data;
+  node *next;
+ };
+class ll
+ {
+   node *start;
+   public:
+    ll()
+     {
+       start=NULL;
+     }
+    ll(int k)
+     {
+      start = new node;
+      start->data=k;
+      start->next=NULL;
+     }
+    void insert(int k)
+    {
+      node *p = new node;
+      p->data=k;
+      p->next=NULL;
+      if(start==NULL)
+       {
+       cout<<"Start to be initialised\n";
+       start=p;
+       cout<<"Start initialised \n";
+       }
+      else
+        {
+         node *temp = start;
+         while(temp->next!=NULL)
+          temp=temp->next;
+         temp->next=p;
+        }
+    }
+    void print()
+     {
+      node *temp=start;
+      while(temp!=NULL)
+         {
+          cout<<temp->data<<" ";
+          temp=temp->next;
+         }
+     }
+ };
+int main()
+{
+  ll ptr;
+  int ch=1;
+  while(ch!=3)
+    {
+      cout<<"1:inset, 2: Print , 3:Exit";
+      cin>>ch;
+       switch(ch)
+        {
+          case 1: {
+                    cout<<"Enter data";
+                    int t;
+                    cin>>t;
+                    ptr.insert(t);
+                    break;
+                  }
+          case 2 : {
+                    ptr.print();
+                   break;
+                   }
+
+        }
+    }
+}
+
+
+
+                     
