@@ -71,6 +71,7 @@ class ll
              break;
             }
            temp = temp->next;
+           count++;
          }
       if(flag==0)
       cout<<"Element not found \n";
