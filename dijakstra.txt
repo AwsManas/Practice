@@ -1,0 +1,56 @@
+#include<iostream>
+using namespace std;
+int V;
+int mindis(int dist[],int sptset[])
+{
+int min= 999,minindex;
+for(int v=0; v<V; v++)
+  {
+   if(sptset[v]==0&&dist[v]<=min)
+     {
+      min= dist[v];
+      minindex=v;
+     }
+  }
+  return minindex;
+}
+void print(int dist[],int n)
+{
+cout<<"Minimmum  Distance from Source\n";
+   for (int i = 0; i < V; i++)
+      cout<<"Distance of " << i <<"  =  "<< dist[i]<<endl;
+}
+void dijkstra(int graph[][10],int s)
+  {
+    int dist[V],sptset[V];
+    for (int i = 0; i < V; i++)
+        dist[i] = 999, sptset[i] = 0;
+    dist[s]=0;
+    for(int count=0; count<V-1; count++)
+    {
+      int u=mindis(dist,sptset);
+      sptset[u]=1;
+      for(int v=0; v<V; v++)
+       {
+        if (!sptset[v] && graph[u][v] && dist[u] != 999&& dist[u]+graph[u][v] < dist[v])
+        dist[v] = dist[u] + graph[u][v];
+       }
+    }
+  print(dist,V);
+  }
+int main()
+{
+ cout<<"Enter the number of vertices : ";
+ cin>>V;
+ int graph[V][10];
+cout<<"Enter the path matrix :- \n";
+for(int i=0; i<V; i++)
+  {
+   for(int j=0; j<V; j++)
+   cin>>graph[i][j];
+  }
+cout<<"Enter source vertex : ";
+int s;
+cin>>s;
+dijkstra(graph,s);
+}
