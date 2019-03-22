@@ -1,0 +1,89 @@
+#include<iostream>
+#include<stdio.h>
+using namespace std;
+class stud
+{
+ public:
+ char USN[10],nm[10];
+ int age;
+ void getdata()
+  {
+   cout<<"Name : ";
+   scanf("%s",nm);
+   cout<<"USN : ";
+   scanf("%s",USN);
+   cout<<"Age : ";
+   cin>>age;
+  }
+
+};
+class ug : public stud
+{
+ int sem,fees,sfund;
+ public:
+ static int ugage;
+ public :
+      void en(int s,int d)
+        {
+          sem =s;
+          sfund = d;
+          fees= 100;
+          getdata();
+          ugage+=age;
+        }
+    void print()
+     {
+      cout<<"NAme : "<<nm<<endl<<sem<<" "<<age<<endl<<USN<<endl<<"Fees : "<<fees<<" Fund : "<<sfund<<endl;
+     }
+
+};
+int ug::ugage = 0 ;
+class pg : public stud
+{
+ int sem,fees,sfund;
+  public:
+ static int pgage;
+ public :
+      void en(int s,int d)
+        {
+          sem =s;
+          sfund = d;
+          fees= 200;
+          getdata();
+          pgage+=age;
+        }
+    void print()
+     {
+      cout<<"NAme : "<<nm<<endl<<sem<<" "<<age<<endl<<USN<<endl<<"Fees : "<<fees<<" Fund : "<<sfund<<endl;
+     }
+
+};
+int pg::pgage = 0 ;
+int main()
+{
+ cout<<"Enter number of UG and Pg stud";
+ int n1,n2;
+ cin>>n1>>n2;
+ cout<<"UG:-\n";
+ ug p1[n1] ; pg p2[n2];
+ for(int i=0; i<n1; i++)
+  {
+    cout<<"Enter sem and student fund : ";
+    int a,s;
+    cin>>s>>a;
+    p1[i].en(s,a);
+   p1[i].print();
+  }
+ cout<<"Aveage age = "<<ug::ugage/n1<<endl;
+ cout<<"PG:-\n";
+ for(int i=0; i<n2; i++)
+  {
+    cout<<"Enter sem and student fund : ";
+    int a,s;
+    cin>>s>>a;
+    p2[i].en(s,a);
+    p2[i].print();
+  }
+ cout<<"Aveage age = "<<pg::pgage/n2<<endl;
+}
+                                
