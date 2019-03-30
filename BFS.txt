@@ -1,0 +1,42 @@
+#include<iostream>
+using namespace std;
+int visited[10];
+int cost[10][10];
+int visit[10];
+int qu[10];
+int rear,front;
+int main()
+{
+int n,m,k;
+cout<<"eNTER THE NUMBER OF VERTICES : ";
+cin>>n;
+cout<<"Enter the number of edges : ";
+cin>>m;
+int j,l;
+cout<<"EDGES:-\n";
+for(int i=1; i<=m; i++)
+{
+  cin>>l>>j;
+  cost[l][j]=1;
+}
+cout<<"Enter source vertex :- ";
+int v; cin>>v;
+cout<<"BFS:-\n"<<v<<" ";
+visited[v]=1;
+k=1;
+while(k<n)
+  {
+    for( j=1; j<=n; j++)
+     {
+       if(cost[v][j]!=0&&visited[j]!=1&&visit[j]!=1)
+        {
+         visit[j]=1;
+         qu[rear++]=j;
+        }
+     }
+   v=qu[front++];
+   cout<<v<<" ";
+   k++;
+   visit[v]=0; visited[v]=1;
+  }
+}
