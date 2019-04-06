@@ -1,0 +1,38 @@
+#include<iostream>
+#include<string>
+using namespace std;
+int thanossort(int a[],int n, int low, int high)
+ {
+ 	if(n>1)
+ 	{
+ 	  int flag=0;
+      for(int i=low; i<high-1; i++)
+        if(a[i]>a[i+1])
+          {
+          	flag = 1;
+          	break;
+          }
+       if(flag==0)
+       return n;
+       else
+       {
+       	int mid = (low+high)/2;
+       	int l = thanossort(a,n/2,low,mid);
+       	int r = thanossort(a,n/2,mid+1,high);
+       	return l>r?l:r;
+       }
+ 	}
+ 	else return 1;
+ }
+int main()
+{
+  int n;
+  cin>>n;
+  int arr[n];
+  for(int i=0; i<n; i++)
+  	cin>>arr[i];
+  cout<<thanossort(arr,n,0,n);
+}
+
+
+
