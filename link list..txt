@@ -1,128 +1,177 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
 class node
- {
-   public:
-  int data;
-  node *next;
- };
+{
+public:
+    int data;
+    node *next;
+};
 class ll
- {
-   node *start;
-   public:
+{
+    node *start;
+    int count;
+
+public:
     ll()
-     {
-       start=NULL;
-     }
-    ll(int k)
-     {
-      start = new node;
-      start->data=k;
-      start->next=NULL;
-     }
-    void insert(int k)
     {
-      node *p = new node;
-      p->data=k;
-      p->next=NULL;
-      if(start==NULL)
-       {
-      // cout<<"Start to be initialised\n";
-       start=p;
-     //  cout<<"Start initialised \n";
-       }
-      else
+        count = 0;
+        start = NULL;
+    }
+    ll(int k)
+    {
+        count = 0;
+        start = new node;
+        start->data = k;
+        start->next = NULL;
+        count++;
+    }
+    void insert_pos(int k, int pos)
+    {
+        node *p = new node;
+        p->data = k;
+        p->next = NULL;
+        if (pos < 0 || pos > count)
         {
-         node *temp = start;
-         while(temp->next!=NULL)
-          temp=temp->next;
-         temp->next=p;
+            cout << "Invalid position." << endl;
+        }
+
+        else
+        {
+            node *temp = start;
+            int k = 0;
+            while (k < pos)
+            {
+                temp = temp->next;
+                k++;
+            }
+            node *nx = temp->next;
+            temp->next = p;
+            p->next = nx;
+            count++;
         }
     }
-    void delend()
-     {
-      if(start==NULL)
-      cout<<"Cant do , Underflow!";
-      else if(start->next==NULL)
-      start=NULL;
-      else
-      {
-       node *prev=start;
-       node *curr= start->next;
-       while(curr->next!=NULL)
-          {
-            prev=curr;
-            curr=curr->next;
-          }
-       prev->next=NULL;
-       delete curr;
-      }
-     }
-    void search (int k)
+    void insert(int k)
     {
-      int count = 1,flag=0;
-      node *temp = start;
-      while(temp!=NULL)
-         {
-          if(temp->data==k)
+        node *p = new node;
+        p->data = k;
+        p->next = NULL;
+        if (start == NULL)
+        {
+            // cout<<"Start to be initialised\n";
+            start = p;
+            //  cout<<"Start initialised \n";
+        }
+        else
+        {
+            node *temp = start;
+            while (temp->next != NULL)
+                temp = temp->next;
+            temp->next = p;
+        }
+        count++;
+    }
+    void delend()
+    {
+        if (start == NULL)
+            cout << "Cant do , Underflow!";
+        else if (start->next == NULL)
+        {
+            start = NULL;
+            count--;
+        }
+        else
+        {
+            node *prev = start;
+            node *curr = start->next;
+            while (curr->next != NULL)
             {
-             flag=1;
-             cout<<"Element fount at position "<<count<<endl;
-             break;
+                prev = curr;
+                curr = curr->next;
             }
-           temp = temp->next;
-           count++;
-         }
-      if(flag==0)
-      cout<<"Element not found \n";
+            prev->next = NULL;
+            delete curr;
+            count--;
+        }
+    }
+    void search(int k)
+    {
+        int count = 1, flag = 0;
+        node *temp = start;
+        while (temp != NULL)
+        {
+            if (temp->data == k)
+            {
+                flag = 1;
+                cout << "Element fount at position " << count << endl;
+                break;
+            }
+            temp = temp->next;
+            count++;
+        }
+        if (flag == 0)
+            cout << "Element not found \n";
     }
     void print()
-     {
-      node *temp=start;
-      while(temp!=NULL)
-         {
-          cout<<temp->data<<" ";
-          temp=temp->next;
-         }
-     }
- };
+    {
+        node *temp = start;
+        while (temp != NULL)
+        {
+            cout << temp->data << " ";
+            temp = temp->next;
+        }
+    }
+};
 int main()
 {
-  ll ptr;
-  int ch=1;
-  while(ch!=5)
+    ll ptr;
+    int ch = 1;
+    while (ch != 6)
     {
-      cout<<"1:insert, 2: Print , 3 :Delete end 4:Search 5:Exit";
-      cin>>ch;
-       switch(ch)
+        cout << "1:insert, 2: Print , 3 :Delete end 4:Search 5:Inser_Pos 6. Exit";
+        cin >> ch;
+        switch (ch)
         {
-          case 1: {
-                    cout<<"Enter data";
-                    int t;
-                    cin>>t;
-                    ptr.insert(t);
-                    break;
-                  }
-          case 2 : {
-                    ptr.print();
-                   break;
-                   }
-          case 3 : {
-                     ptr.delend();
-                     break;
-                   }
-          case 4 : {
-                    cout<<"Enter the element to search : ";
-                    int k;
-                    cin>>k;
-                    ptr.search(k);
-                    break;
-                   }
-
+        case 1:
+        {
+            cout << "Enter data";
+            int t;
+            cin >> t;
+            ptr.insert(t);
+            break;
+        }
+        case 2:
+        {
+            ptr.print();
+            break;
+        }
+        case 3:
+        {
+            ptr.delend();
+            break;
+        }
+        case 4:
+        {
+            cout << "Enter the element to search : ";
+            int k;
+            cin >> k;
+            ptr.search(k);
+            break;
+        }
+        case 5:
+        {
+            cout << "Enter the position : ";
+            int p;
+            cin >> p;
+            cout << "ENter data : ";
+            int k;
+            cin >> k;
+            ptr.insert_pos(k, p);
+            break;
+        }
+        case 6:
+        {
+            return 0;
+        }
         }
     }
 }
-
-
-                      
-                                                                       
