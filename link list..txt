@@ -70,6 +70,65 @@ public:
         }
         count++;
     }
+    void desr()
+    {
+        if(count==0)
+        {
+            cout<<"{}\n";
+        }
+        else
+        {
+        int a[count];
+        int i=0;
+        node *t = start;
+        while(t->next!=NULL)
+        {
+            a[i++] = t->data;
+            t = t->next;
+        }
+        a[i] = t->data;
+        while (i!=-1)
+        {
+            cout<<a[i--]<<" ";
+        }
+    }
+
+    }
+    void del_pos(int p)
+    {
+      if(p<=0||p>count)
+      {
+          cout<<"Invalid!\n";
+      }
+      else 
+      {
+          if(p==count-1)
+          delend();
+          else if (p==1)
+          {
+              node * t = start;
+              start = start->next;
+              delete t;
+              count--;
+          }
+          else
+          {
+              node *prev= start;
+              node *curr = start->next;
+              while(p!=2)
+              {
+                prev = curr;
+                curr = curr ->next;
+                p--;    
+              }
+              node *n = curr->next;
+              prev->next = n;
+              delete curr;
+              count--;
+          }
+          
+      }      
+    }
     void delend()
     {
         if (start == NULL)
@@ -125,9 +184,9 @@ int main()
 {
     ll ptr;
     int ch = 1;
-    while (ch != 6)
+    while (ch != 8)
     {
-        cout << "1:insert, 2: Print , 3 :Delete end 4:Search 5:Inser_Pos 6. Exit";
+        cout << "1:insert, 2: Print , 3 :Delete end 4:Search 5:Inser_Pos 6. Del_Pos 7. Reverse 8. Exit";
         cin >> ch;
         switch (ch)
         {
@@ -170,7 +229,15 @@ int main()
         }
         case 6:
         {
-            return 0;
+            cout<<"Enter the position : ";
+            int k; cin>>k;
+            ptr.del_pos(k);
+            break;
+        }
+        case 7 :
+        {
+            ptr.desr();
+            break;
         }
         }
     }
